@@ -15,10 +15,12 @@ class Main extends Component {
             newRepo: '',
             repositories: [],
             loading: false,
+            error: null,
         };
     }
 
     componentDidMount() {
+        //Salva no local storage
         const repositories = localStorage.getItem('repositories');
 
         if (repositories) {
@@ -39,17 +41,33 @@ class Main extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        this.setState({ loading: true });
-        const { newRepo, repositories } = this.state;
-        const response = await api.get(`/repos/${newRepo}`);
-        const data = {
-            name: response.data.full_name,
-        };
-        this.setState({
-            repositories: [...repositories, data],
-            newRepo: '',
-            loading: false,
-        });
+        this.setState({ loading: true, error: false });
+        try {
+            const { newRepo, repositories } = this.state;
+            if(newRepo === '') throw 'Cara Adiciona um repositório';
+            const hasRepo  = repositories.find(r => r.name === newRepo);
+            if(hasRepo) throw 'Cara o repositório está duplicado';
+            const response = await api.get(`/repos/${newRepo}`);
+            const data = {
+                name: response.data.full_name,
+            };
+            this.setState({
+                repositories: [...repositories, data],
+                newRepo: '',
+                loading: false,
+            });
+
+            /**Fim Try */
+        }catch(error){
+
+            this.setState({error: true});
+        }finally{
+            this.setState({loading: false})
+        }
+
+
+
+
     };
 
     render() {
