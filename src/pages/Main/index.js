@@ -4,8 +4,9 @@ import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
+import {Container } from '../../components/Container/';
+import { Form, SubmitButton, List } from './styles';
 
-import { Container, Form, SubmitButton, List } from './styles';
 
 class Main extends Component {
     constructor(props) {
