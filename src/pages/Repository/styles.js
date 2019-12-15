@@ -59,10 +59,12 @@ export const IssueList  = styled.ul`
         padding: 15px 10px;
         border: 1px solid #eee;
         border-radius: 4px;
-    }
-    & + li {
+
+        & + li {
         margin-top: 10px;
     }
+    }
+
     img {
         width: 36px;
         height: 36px;
