@@ -9,7 +9,7 @@ export const Form = styled.form`
 
     input {
         flex: 1;
-        border: 1px solid #eee;
+        border: 1px solid ${ props => (props.error ?  '#ff6b6b' : '#eee')};
         padding: 10px 15px;
         border-radius: 4px;
         font-size: 16px;
@@ -29,7 +29,7 @@ export const SubmitButton = styled.button.attrs(props => ({
     type: 'submit',
     disabled: props.loading,
 }))`
-    background: #7159c1;
+    background: #054994;
     border: 0;
     padding: 0 15px;
     margin-left: 15px;
@@ -64,7 +64,7 @@ export const List = styled.ul`
             border-top: 1px solid #eee;
         }
         a {
-            color: #7159c1;
+            color: #054994;
             text-decoration: none;
         }
     }
